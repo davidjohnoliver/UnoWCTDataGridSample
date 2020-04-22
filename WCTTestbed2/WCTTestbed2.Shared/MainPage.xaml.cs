@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.SampleApp.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,18 @@ namespace WCTTestbed2
 	/// </summary>
 	public sealed partial class MainPage : Page
 	{
+        private DataGridDataSource viewModel = new DataGridDataSource();
+		
 		public MainPage()
 		{
 			this.InitializeComponent();
+
+			Loading += MainPage_Loading;
+		}
+
+		private async void MainPage_Loading(object sender, object args)
+		{
+			dataGrid.ItemsSource = await viewModel.GetDataAsync();
 		}
 	}
 }
